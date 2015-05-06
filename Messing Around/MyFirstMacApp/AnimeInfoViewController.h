@@ -15,9 +15,11 @@
 @property (weak) IBOutlet NSTextField *descriptionLabel;
 @property (weak) IBOutlet NSTextField *titleLabel;
 @property (weak) IBOutlet NSTextField *contentTypeLabel;
+@property (weak) IBOutlet NSTextField *episodeLabel;
 @property (weak) IBOutlet NSTextField *episodeCountLabel;
 @property (weak) IBOutlet NSTextField *statusLabel;
 @property (weak) IBOutlet NSTextField *airingLabel;
 @property (weak) IBOutlet NSImageView *imageView;
+@property (weak) IBOutlet NSScrollView *scrollView;
 
 @end

@@ -18,25 +18,31 @@
     [super viewDidLoad];
     // Do view setup here.
     
-    _titleLabel.stringValue = _contentSource[@"english"];
-    [_titleLabel sizeToFit];
+    _titleLabel.stringValue = _contentSource[@"title"];
+    NSString *englishName = [_contentSource[@"english"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if(![englishName isEqualToString:@""]){
+        _titleLabel.stringValue = englishName;
+    }
     
-    _descriptionLabel.stringValue = _contentSource[@"description"];
-    [_descriptionLabel sizeToFit];
+    _descriptionLabel.stringValue = [self removeHtmlFromString:_contentSource[@"description"]];
     
     _contentTypeLabel.stringValue = _contentSource[@"type"];
-    [_contentTypeLabel sizeToFit];
     
-    _episodeCountLabel.stringValue = _contentSource[@"episodes"];
-    [_episodeCountLabel sizeToFit];
+    if([_contentSource[@"contentType"] isEqualToString:@"manga"]){
+        _episodeCountLabel.stringValue = _contentSource[@"chapters"];
+        _episodeLabel.stringValue = @"Chapters:";
+    }
+    else{
+        _episodeCountLabel.stringValue = _contentSource[@"episodes"];
+    }
     
-    _statusLabel.stringValue = _contentSource[@"status"];
-    [_statusLabel sizeToFit];
     
-    _airingLabel.stringValue = [NSString stringWithFormat:@"%@ - %@", _contentSource[@"start_date"], _contentSource[@"end_date"]];
-    [_airingLabel sizeToFit];
+    _statusLabel.stringValue = [NSString stringWithFormat:@"Status: %@", _contentSource[@"status"]];
+    
+    _airingLabel.stringValue = [NSString stringWithFormat:@"%@ - %@", [_contentSource[@"start_date"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]], _contentSource[@"end_date"]];
     
     _imageView.image = [NSImage imageNamed:@"Video_Icon"];
+    [_imageView setImageScaling:NSImageScaleProportionallyUpOrDown];
     
     dispatch_queue_t imageDownloadQueue = dispatch_queue_create("Image Download Queue",NULL);
     dispatch_async(imageDownloadQueue, ^{
@@ -48,6 +54,21 @@
             }
         });
     });
+    
+    
+    // Scroll to top
+    NSPoint newScrollOrigin = NSMakePoint(0.0,NSMaxY([[_scrollView documentView] frame]));
+    [[self.scrollView contentView] scrollToPoint:newScrollOrigin];
+    [self.scrollView reflectScrolledClipView:[self.scrollView contentView]];
+}
+
+- (NSString *) removeHtmlFromString:(NSString *)string
+{
+    NSString *result = @"";
+    result = [string stringByReplacingOccurrencesOfString:@"br /" withString:@""];
+    result = [result stringByReplacingOccurrencesOfString:@"div " withString:@""];
+    result = [result stringByReplacingOccurrencesOfString:@"/div" withString:@""];
+    return result;
 }
 
 

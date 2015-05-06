@@ -170,7 +170,8 @@
     for(DatabaseGridItem *gridItemView in [_collectionView subviews]){
         if([gridItemView.selectionMarker isEqualToString:@"IS_SELECTED"]){
             _arrayController.selectionIndex = i;
-            NSDictionary *feedItem = feeds[i];
+            NSMutableDictionary *feedItem = [NSMutableDictionary dictionaryWithDictionary:feeds[i]];
+            feedItem[@"contentType"] = queryType;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"GridSelectionNotificationn" object:nil userInfo:feedItem];
         }
         i++;
