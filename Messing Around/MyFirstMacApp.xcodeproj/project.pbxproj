@@ -47,6 +47,7 @@
 		4C92B2031AF84E1500A52B97 /* tv_show@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C92B1F81AF84E1500A52B97 /* tv_show@2x.png */; };
 		4C92B2041AF84E1500A52B97 /* Video_Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 4C92B1F91AF84E1500A52B97 /* Video_Icon.png */; };
 		4CB3B5851AF9A86400DA128D /* GridImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CB3B5841AF9A86400DA128D /* GridImageView.m */; };
+		4CC974F41AFAAB2500D3D569 /* AnimeInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CC974F31AFAAB2500D3D569 /* AnimeInfoViewController.m */; };
 		4CDB7BF01AFA4069003CA2BF /* DatabaseGridItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB7BEF1AFA4069003CA2BF /* DatabaseGridItem.m */; };
 		4CDB7BF31AFA439F003CA2BF /* DatabaseCollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB7BF21AFA439F003CA2BF /* DatabaseCollectionViewItem.m */; };
 		4CDB7BF61AFA4ACA003CA2BF /* AppUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CDB7BF51AFA4ACA003CA2BF /* AppUtils.m */; };
@@ -128,6 +129,8 @@
 		4C92B1F91AF84E1500A52B97 /* Video_Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Video_Icon.png; sourceTree = "<group>"; };
 		4CB3B5831AF9A86400DA128D /* GridImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridImageView.h; sourceTree = "<group>"; };
 		4CB3B5841AF9A86400DA128D /* GridImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridImageView.m; sourceTree = "<group>"; };
+		4CC974F21AFAAB2500D3D569 /* AnimeInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimeInfoViewController.h; sourceTree = "<group>"; };
+		4CC974F31AFAAB2500D3D569 /* AnimeInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimeInfoViewController.m; sourceTree = "<group>"; };
 		4CDB7BEE1AFA4069003CA2BF /* DatabaseGridItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseGridItem.h; sourceTree = "<group>"; };
 		4CDB7BEF1AFA4069003CA2BF /* DatabaseGridItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseGridItem.m; sourceTree = "<group>"; };
 		4CDB7BF11AFA439F003CA2BF /* DatabaseCollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseCollectionViewItem.h; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				4CDB7BEF1AFA4069003CA2BF /* DatabaseGridItem.m */,
 				4CDB7BF11AFA439F003CA2BF /* DatabaseCollectionViewItem.h */,
 				4CDB7BF21AFA439F003CA2BF /* DatabaseCollectionViewItem.m */,
+				4CC974F21AFAAB2500D3D569 /* AnimeInfoViewController.h */,
+				4CC974F31AFAAB2500D3D569 /* AnimeInfoViewController.m */,
 			);
 			path = MyFirstMacApp;
 			sourceTree = "<group>";
@@ -430,6 +435,7 @@
 				4CB3B5851AF9A86400DA128D /* GridImageView.m in Sources */,
 				4CDB7BF61AFA4ACA003CA2BF /* AppUtils.m in Sources */,
 				4C08679F1AF6C2D20048B6D0 /* main.m in Sources */,
+				4CC974F41AFAAB2500D3D569 /* AnimeInfoViewController.m in Sources */,
 				4C554FD01AF7C6C700E9C688 /* ListViewController.m in Sources */,
 				4C5550231AF7D38D00E9C688 /* PVAsyncImageView.m in Sources */,
 				4C92B1EC1AF84C1B00A52B97 /* NewVideoListController.m in Sources */,

@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "WebViewController.h"
 #import "DatabaseViewController.h"
+#import "AnimeInfoViewController.h"
 
 @implementation ViewController{
     NSArray *dataSource;
@@ -29,8 +30,7 @@
     containers = @[_containerView, _containerView2, _containerView3];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleListItemSelectionNotification:) name:@"ListItemSelectedNotification" object:nil];
-    
-    DatabaseViewController *o = [[DatabaseViewController alloc] initWithNibName:@"DatabaseViewController" bundle:[NSBundle mainBundle]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGridItemSelectionNotification:) name:@"GridSelectionNotificationn" object:nil];
 }
 
 
@@ -115,6 +115,16 @@
     destinationLink = info[@"link"];
     
     [self performSegueWithIdentifier:@"showListDetail" sender:self];
+}
+
+- (void) handleGridItemSelectionNotification:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    
+    AnimeInfoViewController *avc = [self.storyboard instantiateControllerWithIdentifier:@"animeInfoViewController"];
+    avc.contentSource = info;
+    
+    [self presentViewControllerAsModalWindow:avc];
 }
 
 - (void) prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender

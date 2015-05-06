@@ -58,46 +58,6 @@
     
 }
 
-- (void) searchForTitlesWithName:(NSString *)searchQuery andMediaType:(NSString *)mediaType
-{
-    [_activityIndicator startAnimation:self];
-    [[_arrayController mutableArrayValueForKey:@"content"] removeAllObjects];
-    feeds = [[NSMutableArray alloc] init];
-    
-    searchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
-    urlString = [NSString stringWithFormat:@"http://oduwa:uchiha16@myanimelist.net/api/%@/search.xml?q=%@", mediaType, searchQuery];
-    NSLog(@"%@", urlString);
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSData *urlData = [NSData dataWithContentsOfURL:url];
-    parser = [[NSXMLParser alloc] initWithData:[self removeHtmlEntities:urlData]];
-    [parser setDelegate:self];
-    [parser setShouldResolveExternalEntities:NO];
-    [parser parse];
-    
-    
-    
-    for(NSDictionary *result in feeds){
-        NSMutableDictionary *dataSourceItem = [NSMutableDictionary dictionary];
-        dataSourceItem[@"itemTitle"] = result[@"title"];
-        dataSourceItem[@"itemImage"] = [NSImage imageNamed:@"Video_Icon"];
-        /* Create Queue */
-        dispatch_queue_t mangaListQueue = dispatch_queue_create("Manga List Queue",NULL);
-        
-        /* Dispatch some work to the queue to perform asynchronously */
-        dispatch_async(mangaListQueue, ^{
-            NSImage *img = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:result[@"img"]]];
-            if(img){
-                dataSourceItem[@"itemImage"] = img;
-            }
-        });
-        
-        [_arrayController addObject:dataSourceItem];
-    }
-    
-   [_activityIndicator stopAnimation:self];
-}
-
-
 
 #pragma mark - NSXML Delegate methods
 
@@ -202,7 +162,7 @@
 }
 
 
-#pragma mark NSCOllectionView Selection
+#pragma mark - NSCOllectionView Selection
 
 - (void) updateSelections
 {
@@ -210,10 +170,63 @@
     for(DatabaseGridItem *gridItemView in [_collectionView subviews]){
         if([gridItemView.selectionMarker isEqualToString:@"IS_SELECTED"]){
             _arrayController.selectionIndex = i;
+            NSDictionary *feedItem = feeds[i];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"GridSelectionNotificationn" object:nil userInfo:feedItem];
         }
         i++;
     }
 }
+
+- (void) clearSelections
+{
+    for(DatabaseGridItem *gridItemView in [_collectionView subviews]){
+        gridItemView.selectionMarker = @"";
+    }
+}
+
+
+#pragma mark - Search Helpers
+
+- (void) searchForTitlesWithName:(NSString *)searchQuery andMediaType:(NSString *)mediaType
+{
+    [_activityIndicator startAnimation:self];
+    [[_arrayController mutableArrayValueForKey:@"content"] removeAllObjects];
+    feeds = [[NSMutableArray alloc] init];
+    
+    searchQuery = [searchQuery stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    urlString = [NSString stringWithFormat:@"http://oduwa:uchiha16@myanimelist.net/api/%@/search.xml?q=%@", mediaType, searchQuery];
+    NSLog(@"%@", urlString);
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    parser = [[NSXMLParser alloc] initWithData:[self removeHtmlEntities:urlData]];
+    [parser setDelegate:self];
+    [parser setShouldResolveExternalEntities:NO];
+    [parser parse];
+    
+    
+    
+    for(NSDictionary *result in feeds){
+        NSMutableDictionary *dataSourceItem = [NSMutableDictionary dictionary];
+        dataSourceItem[@"itemTitle"] = result[@"title"];
+        dataSourceItem[@"itemImage"] = [NSImage imageNamed:@"Video_Icon"];
+        /* Create Queue */
+        dispatch_queue_t mangaListQueue = dispatch_queue_create("Manga List Queue",NULL);
+        
+        /* Dispatch some work to the queue to perform asynchronously */
+        dispatch_async(mangaListQueue, ^{
+            NSImage *img = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:result[@"img"]]];
+            if(img){
+                dataSourceItem[@"itemImage"] = img;
+            }
+        });
+        
+        [_arrayController addObject:dataSourceItem];
+    }
+    
+    [_activityIndicator stopAnimation:self];
+}
+
+#pragma mark - IBActions
 
 - (IBAction)searchButtonPressed:(id)sender
 {
@@ -241,12 +254,6 @@
     
 }
 
-- (void) clearSelections
-{
-    for(DatabaseGridItem *gridItemView in [_collectionView subviews]){
-        gridItemView.selectionMarker = @"";
-    }
-}
 
 
 #pragma mark - KVO
