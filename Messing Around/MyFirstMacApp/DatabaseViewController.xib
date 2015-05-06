@@ -6,7 +6,11 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="DatabaseViewController">
             <connections>
+                <outlet property="activityIndicator" destination="W9j-M1-kiG" id="1Wd-Ix-ehn"/>
                 <outlet property="arrayController" destination="Q1i-6b-uGt" id="7RU-xN-dGC"/>
+                <outlet property="collectionView" destination="FpL-cc-Re9" id="hyI-Rl-OX9"/>
+                <outlet property="searchField" destination="8My-sg-6vh" id="IYJ-2L-Tln"/>
+                <outlet property="segmentedControl" destination="A3a-f5-iVs" id="nke-Qu-NRs"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -16,6 +20,7 @@
             <declaredKeys>
                 <string>itemTitle</string>
                 <string>itemImage</string>
+                <string>itemIndex</string>
             </declaredKeys>
         </arrayController>
         <customView id="Hz6-mo-xeY">
@@ -31,14 +36,20 @@
                             <segment label="Manga" width="58" selected="YES" tag="1"/>
                         </segments>
                     </segmentedCell>
+                    <connections>
+                        <action selector="segmentControlPressed:" target="-2" id="yK3-bo-b3J"/>
+                    </connections>
                 </segmentedControl>
                 <searchField wantsLayer="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8My-sg-6vh">
                     <rect key="frame" x="20" y="214" width="440" height="22"/>
-                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="2de-sl-17G">
+                    <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="2de-sl-17G">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </searchFieldCell>
+                    <connections>
+                        <action selector="searchButtonPressed:" target="-2" id="ZPk-Zg-YPm"/>
+                    </connections>
                 </searchField>
                 <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEb-KI-W2X">
                     <rect key="frame" x="20" y="12" width="440" height="194"/>
@@ -46,10 +57,10 @@
                         <rect key="frame" x="1" y="1" width="248" height="158"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView id="FpL-cc-Re9">
+                            <collectionView selectable="YES" id="FpL-cc-Re9">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="158"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="primaryBackgroundColor" red="0.98823529409999999" green="0.23529411759999999" blue="0.47058823529999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="primaryBackgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 <connections>
                                     <binding destination="Q1i-6b-uGt" name="content" keyPath="arrangedObjects" id="ELW-js-9t1"/>
                                     <outlet property="itemPrototype" destination="BCO-3m-rYW" id="jEN-3H-rwm"/>
@@ -66,10 +77,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="W9j-M1-kiG">
+                    <rect key="frame" x="224" y="93" width="32" height="32"/>
+                </progressIndicator>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="8My-sg-6vh" secondAttribute="trailing" constant="20" symbolic="YES" id="2eF-Kf-etk"/>
                 <constraint firstItem="lEb-KI-W2X" firstAttribute="top" secondItem="8My-sg-6vh" secondAttribute="bottom" constant="8" symbolic="YES" id="354-7I-0DU"/>
+                <constraint firstItem="W9j-M1-kiG" firstAttribute="centerX" secondItem="8My-sg-6vh" secondAttribute="centerX" id="8b3-Vw-brh"/>
                 <constraint firstItem="8My-sg-6vh" firstAttribute="top" secondItem="A3a-f5-iVs" secondAttribute="bottom" constant="8" symbolic="YES" id="Fe4-Te-eXm"/>
                 <constraint firstAttribute="bottom" secondItem="lEb-KI-W2X" secondAttribute="bottom" constant="12" id="IT7-4H-Wk7"/>
                 <constraint firstItem="A3a-f5-iVs" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="10" id="SV3-Wk-FeM"/>
@@ -77,6 +92,7 @@
                 <constraint firstItem="lEb-KI-W2X" firstAttribute="leading" secondItem="8My-sg-6vh" secondAttribute="leading" id="VRA-sT-K7D"/>
                 <constraint firstItem="8My-sg-6vh" firstAttribute="trailing" secondItem="lEb-KI-W2X" secondAttribute="trailing" id="b49-Q6-WcQ"/>
                 <constraint firstItem="8My-sg-6vh" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="20" symbolic="YES" id="oqU-SZ-QwT"/>
+                <constraint firstItem="W9j-M1-kiG" firstAttribute="centerY" secondItem="lEb-KI-W2X" secondAttribute="centerY" id="spJ-Tb-E4p"/>
             </constraints>
         </customView>
         <collectionViewItem id="BCO-3m-rYW">
@@ -84,18 +100,46 @@
                 <outlet property="view" destination="oJy-pE-dor" id="6Ud-Ob-XWz"/>
             </connections>
         </collectionViewItem>
-        <view id="oJy-pE-dor">
-            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+        <view id="oJy-pE-dor" customClass="DatabaseGridItem">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AG-kZ-6j6">
-                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                    <rect key="frame" x="0.0" y="30" width="150" height="170"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="jua-Tb-LDH"/>
                     <connections>
                         <binding destination="BCO-3m-rYW" name="value" keyPath="representedObject.itemImage" id="h6h-wz-lhL"/>
                     </connections>
                 </imageView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-nb-mFV">
+                    <rect key="frame" x="-2" y="5" width="154" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="Wm2-VS-cMz">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="BCO-3m-rYW" name="value" keyPath="representedObject.itemTitle" id="qbi-Gt-ClV"/>
+                    </connections>
+                </textField>
+                <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43R-6s-t09">
+                    <rect key="frame" x="-2" y="183" width="44" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="INDEX" id="1E0-EB-FTe">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="BCO-3m-rYW" name="value" keyPath="representedObject.itemIndex" id="rSo-SC-cLR"/>
+                    </connections>
+                </textField>
             </subviews>
+            <connections>
+                <outlet property="imageView" destination="7AG-kZ-6j6" id="y0n-cx-PDA"/>
+                <outlet property="indexLabel" destination="43R-6s-t09" id="8Xt-mI-O0R"/>
+                <outlet property="textLabel" destination="Qor-nb-mFV" id="GX6-SR-Y3c"/>
+            </connections>
+            <point key="canvasLocation" x="353" y="560"/>
         </view>
     </objects>
     <resources>
