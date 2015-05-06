@@ -32,8 +32,8 @@
                     <segmentedCell key="cell" borderStyle="border" alignment="left" style="roundRect" trackingMode="selectOne" id="lfe-9I-ya2">
                         <font key="font" metaFont="cellTitle"/>
                         <segments>
-                            <segment label="Anime" width="58"/>
-                            <segment label="Manga" width="58" selected="YES" tag="1"/>
+                            <segment label="Anime" width="58" selected="YES"/>
+                            <segment label="Manga" width="58" tag="1"/>
                         </segments>
                     </segmentedCell>
                     <connections>
@@ -101,29 +101,18 @@
             </connections>
         </collectionViewItem>
         <view id="oJy-pE-dor" customClass="DatabaseGridItem">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="150" height="210"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7AG-kZ-6j6">
-                    <rect key="frame" x="0.0" y="30" width="150" height="170"/>
+                    <rect key="frame" x="0.0" y="40" width="150" height="170"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSActionTemplate" id="jua-Tb-LDH"/>
                     <connections>
                         <binding destination="BCO-3m-rYW" name="value" keyPath="representedObject.itemImage" id="h6h-wz-lhL"/>
                     </connections>
                 </imageView>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-nb-mFV">
-                    <rect key="frame" x="-2" y="5" width="154" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="Wm2-VS-cMz">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                    <connections>
-                        <binding destination="BCO-3m-rYW" name="value" keyPath="representedObject.itemTitle" id="qbi-Gt-ClV"/>
-                    </connections>
-                </textField>
                 <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43R-6s-t09">
-                    <rect key="frame" x="-2" y="183" width="44" height="17"/>
+                    <rect key="frame" x="-2" y="193" width="44" height="17"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="INDEX" id="1E0-EB-FTe">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -131,6 +120,17 @@
                     </textFieldCell>
                     <connections>
                         <binding destination="BCO-3m-rYW" name="value" keyPath="representedObject.itemIndex" id="rSo-SC-cLR"/>
+                    </connections>
+                </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qor-nb-mFV">
+                    <rect key="frame" x="18" y="15" width="114" height="17"/>
+                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="Wm2-VS-cMz">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                    <connections>
+                        <binding destination="BCO-3m-rYW" name="value" keyPath="representedObject.itemTitle" id="qbi-Gt-ClV"/>
                     </connections>
                 </textField>
             </subviews>
