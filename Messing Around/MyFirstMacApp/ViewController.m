@@ -10,12 +10,14 @@
 #import "WebViewController.h"
 #import "DatabaseViewController.h"
 #import "AnimeInfoViewController.h"
+#import "ChapterListViewController.h"
 
 @implementation ViewController{
     NSArray *dataSource;
     NSArray *icons;
     NSString *destinationTitle;
     NSString *destinationLink;
+    NSDictionary *destinationMangaItem;
     NSArray *containers;
 }
 
@@ -23,14 +25,15 @@
     [super viewDidLoad];
 
     // Do any additional setup after loading the view.
-    dataSource = [NSArray arrayWithObjects:@"News", @"Videos", @"Database", nil];
-    icons = [NSArray arrayWithObjects:@"news_roll", @"tv_show", @"archive", nil];
+    dataSource = [NSArray arrayWithObjects:@"News", @"Videos", @"Database", @"Manga Reader", nil];
+    icons = [NSArray arrayWithObjects:@"news_roll", @"tv_show", @"archive", @"archive", nil];
     [_outlineView reloadData];
     
-    containers = @[_containerView, _containerView2, _containerView3];
+    containers = @[_containerView, _containerView2, _containerView3, _containerView4];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleListItemSelectionNotification:) name:@"ListItemSelectedNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGridItemSelectionNotification:) name:@"GridSelectionNotificationn" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMangaListItemSelectionNotification:) name:@"MangaListItemSelectedNotification" object:nil];
 }
 
 
@@ -83,6 +86,9 @@
     else if([item isEqualToString:@"Database"]){
         cell.imageView.image = [self tintImage:[NSColor whiteColor] withImage:[NSImage imageNamed:icons[2]]];
     }
+    else if([item isEqualToString:@"Manga Reader"]){
+        cell.imageView.image = [self tintImage:[NSColor whiteColor] withImage:[NSImage imageNamed:icons[2]]];
+    }
     
     
     return cell;
@@ -107,6 +113,8 @@
 }
 
 
+#pragma mark - Notifications
+
 - (void) handleListItemSelectionNotification:(NSNotification *)notification
 {
     NSDictionary *info = [notification userInfo];
@@ -127,6 +135,17 @@
     [self presentViewControllerAsModalWindow:avc];
 }
 
+- (void) handleMangaListItemSelectionNotification:(NSNotification *)notification
+{
+    NSDictionary *info = [notification userInfo];
+    destinationMangaItem = info;
+    
+    [self performSegueWithIdentifier:@"showMangaListDetail" sender:self];
+}
+
+
+#pragma mark - Navigation
+
 - (void) prepareForSegue:(NSStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"showListDetail"]){
@@ -134,6 +153,11 @@
         WebViewController *wvc = (WebViewController *) cont.contentViewController;
         wvc.pageTitle = destinationTitle;
         wvc.link = destinationLink;
+    }
+    else if([segue.identifier isEqualToString:@"showMangaListDetail"]){
+        NSWindowController *cont = (NSWindowController *)[segue destinationController];
+        ChapterListViewController *cvc = (ChapterListViewController *) cont.contentViewController;
+        cvc.mangaItem = destinationMangaItem;
     }
 }
 

@@ -14,6 +14,7 @@
 @interface AppUtils : NSObject
 
 @property (strong, nonatomic) DatabaseViewController *dbCont;
+@property (strong, nonatomic) NSString *mangaRootSource;
 
 /**
  * Creates a singleton instance of an AppUtils object from which methods and resources can be shraed

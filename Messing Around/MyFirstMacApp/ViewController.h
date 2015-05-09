@@ -15,6 +15,7 @@
 @property (weak) IBOutlet NSView *containerView;
 @property (weak) IBOutlet NSView *containerView2;
 @property (weak) IBOutlet NSView *containerView3;
+@property (weak) IBOutlet NSView *containerView4;
 
 
 @end

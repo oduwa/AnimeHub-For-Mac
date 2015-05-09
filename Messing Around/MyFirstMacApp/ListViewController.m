@@ -198,9 +198,6 @@
     NSString *title = _feeds[selectedRowIndex][@"title"];
     NSString *link = _feeds[selectedRowIndex][@"link"];
     
-    WebViewController *wvc = [self.storyboard instantiateControllerWithIdentifier:@"webViewController"];
-    wvc.pageTitle = title;
-    wvc.link = link;
 
     NSDictionary *info = @{@"title":title, @"link":link};
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ListItemSelectedNotification" object:self userInfo:info];

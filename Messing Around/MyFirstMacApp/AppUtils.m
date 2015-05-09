@@ -20,7 +20,8 @@ static AppUtils *globalInstance = nil;
     self = [super init];
     
     if(self){
-
+        _mangaRootSource = @"https://www.mangaeden.com";
+        //_mangaRootSource = @"https://www.perveden.com";
     }
     
     return self;
