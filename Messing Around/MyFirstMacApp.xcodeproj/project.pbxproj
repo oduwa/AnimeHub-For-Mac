@@ -15,6 +15,10 @@
 		4C0867B31AF6C2D20048B6D0 /* MyFirstMacAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C0867B21AF6C2D20048B6D0 /* MyFirstMacAppTests.m */; };
 		4C2C5B2B1AFD158E00D03179 /* MangaListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2C5B291AFD158E00D03179 /* MangaListViewController.m */; };
 		4C2C5B2F1AFD511B00D03179 /* ChapterListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C2C5B2E1AFD511B00D03179 /* ChapterListViewController.m */; };
+		4C4C74021B05697A005CB280 /* ReaderProxyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4C74011B05697A005CB280 /* ReaderProxyController.m */; };
+		4C4C74051B056A9B005CB280 /* SwipelessPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4C74041B056A9B005CB280 /* SwipelessPageController.m */; };
+		4C4C74091B056C39005CB280 /* ReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C4C74071B056C39005CB280 /* ReaderViewController.m */; };
+		4C4C740A1B056C39005CB280 /* ReaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C4C74081B056C39005CB280 /* ReaderViewController.xib */; };
 		4C554FD01AF7C6C700E9C688 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C554FCF1AF7C6C700E9C688 /* ListViewController.m */; };
 		4C554FD21AF7C7EB00E9C688 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C554FD11AF7C7EB00E9C688 /* ApplicationServices.framework */; };
 		4C554FD41AF7C7F700E9C688 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C554FD31AF7C7F700E9C688 /* CFNetwork.framework */; };
@@ -102,6 +106,13 @@
 		4C2C5B291AFD158E00D03179 /* MangaListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MangaListViewController.m; sourceTree = "<group>"; };
 		4C2C5B2D1AFD511B00D03179 /* ChapterListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterListViewController.h; sourceTree = "<group>"; };
 		4C2C5B2E1AFD511B00D03179 /* ChapterListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterListViewController.m; sourceTree = "<group>"; };
+		4C4C74001B05697A005CB280 /* ReaderProxyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderProxyController.h; sourceTree = "<group>"; };
+		4C4C74011B05697A005CB280 /* ReaderProxyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderProxyController.m; sourceTree = "<group>"; };
+		4C4C74031B056A9B005CB280 /* SwipelessPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwipelessPageController.h; sourceTree = "<group>"; };
+		4C4C74041B056A9B005CB280 /* SwipelessPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwipelessPageController.m; sourceTree = "<group>"; };
+		4C4C74061B056C39005CB280 /* ReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderViewController.h; sourceTree = "<group>"; };
+		4C4C74071B056C39005CB280 /* ReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderViewController.m; sourceTree = "<group>"; };
+		4C4C74081B056C39005CB280 /* ReaderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReaderViewController.xib; sourceTree = "<group>"; };
 		4C554FCE1AF7C6C700E9C688 /* ListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListViewController.h; sourceTree = "<group>"; };
 		4C554FCF1AF7C6C700E9C688 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		4C554FD11AF7C7EB00E9C688 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
@@ -315,6 +326,13 @@
 				4C2C5B291AFD158E00D03179 /* MangaListViewController.m */,
 				4C2C5B2D1AFD511B00D03179 /* ChapterListViewController.h */,
 				4C2C5B2E1AFD511B00D03179 /* ChapterListViewController.m */,
+				4C4C74001B05697A005CB280 /* ReaderProxyController.h */,
+				4C4C74011B05697A005CB280 /* ReaderProxyController.m */,
+				4C4C74031B056A9B005CB280 /* SwipelessPageController.h */,
+				4C4C74041B056A9B005CB280 /* SwipelessPageController.m */,
+				4C4C74061B056C39005CB280 /* ReaderViewController.h */,
+				4C4C74071B056C39005CB280 /* ReaderViewController.m */,
+				4C4C74081B056C39005CB280 /* ReaderViewController.xib */,
 			);
 			name = Manga;
 			sourceTree = "<group>";
@@ -441,6 +459,7 @@
 				4C92B2001AF84E1500A52B97 /* right.png in Resources */,
 				4C554FE81AF7C89000E9C688 /* ParseOSX.framework in Resources */,
 				4C92B1FD1AF84E1500A52B97 /* left@2x.png in Resources */,
+				4C4C740A1B056C39005CB280 /* ReaderViewController.xib in Resources */,
 				4C92B1FF1AF84E1500A52B97 /* news_roll@2x.png in Resources */,
 				4C0867A41AF6C2D20048B6D0 /* Images.xcassets in Resources */,
 				4C92B1FA1AF84E1500A52B97 /* archive.png in Resources */,
@@ -468,6 +487,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C4C74021B05697A005CB280 /* ReaderProxyController.m in Sources */,
 				4C0867A21AF6C2D20048B6D0 /* ViewController.m in Sources */,
 				4CFD59101AF989D800E3A049 /* DatabaseViewController.m in Sources */,
 				4CFD59141AF98D4700E3A049 /* DatabaseProxyController.m in Sources */,
@@ -479,6 +499,8 @@
 				4C08679F1AF6C2D20048B6D0 /* main.m in Sources */,
 				4CC974F41AFAAB2500D3D569 /* AnimeInfoViewController.m in Sources */,
 				4C2C5B2F1AFD511B00D03179 /* ChapterListViewController.m in Sources */,
+				4C4C74091B056C39005CB280 /* ReaderViewController.m in Sources */,
+				4C4C74051B056A9B005CB280 /* SwipelessPageController.m in Sources */,
 				4C554FD01AF7C6C700E9C688 /* ListViewController.m in Sources */,
 				4C5550231AF7D38D00E9C688 /* PVAsyncImageView.m in Sources */,
 				4C92B1EC1AF84C1B00A52B97 /* NewVideoListController.m in Sources */,

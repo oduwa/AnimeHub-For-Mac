@@ -16,6 +16,7 @@
 
 
 @property (weak) IBOutlet NSTableView *tableView;
+@property (weak) IBOutlet NSView *containerView;
 
 
 @end

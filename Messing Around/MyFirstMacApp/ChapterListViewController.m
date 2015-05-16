@@ -10,7 +10,10 @@
 #import "AppUtils.h"
 #import "PVAsyncImageView.h"
 
-@interface ChapterListViewController ()
+@interface ChapterListViewController (){
+    BOOL isReaderMode;
+}
+
 
 @end
 
@@ -25,12 +28,32 @@
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.rowSizeStyle = NSTableViewRowSizeStyleCustom;
+    
 }
 
 - (void) viewWillAppear
 {
     [self fetchMangaInfo];
 }
+
+- (void) toggleReaderMode
+{
+    isReaderMode = !isReaderMode;
+    
+    if(isReaderMode){
+        [_tableView reloadData];
+        _tableView.hidden = YES;
+        _tableView.enabled = NO;
+        _containerView.hidden = NO;
+    }
+    else{
+        [_tableView reloadData];
+        _tableView.hidden = NO;
+        _tableView.enabled = YES;
+        _containerView.hidden = YES;
+    }
+}
+
 
 
 - (void) fetchMangaInfo
@@ -51,7 +74,13 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return [_chapterList count]+1;
+    if(!isReaderMode){
+        return [_chapterList count]+1;
+    }
+    else{
+        return 0;
+    }
+    
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
@@ -86,7 +115,7 @@
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
-    
+    [self toggleReaderMode];
 }
 
 @end

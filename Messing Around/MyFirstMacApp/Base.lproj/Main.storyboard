@@ -700,7 +700,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="128" viewBased="YES" id="EAF-GR-RQV">
-                                            <rect key="frame" x="0.0" y="0.0" width="451" height="0.0"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="478" height="0.0"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -805,21 +805,32 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <containerView hidden="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s4S-87-Nz0">
+                                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                                <connections>
+                                    <segue destination="frj-Vw-xPt" kind="embed" id="3KT-N4-Ob9"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="s4S-87-Nz0" firstAttribute="top" secondItem="51v-sb-WMJ" secondAttribute="top" id="LtT-eD-dRY"/>
                             <constraint firstItem="51v-sb-WMJ" firstAttribute="leading" secondItem="euo-9I-8Oa" secondAttribute="leading" id="OcN-fp-EDI"/>
+                            <constraint firstItem="s4S-87-Nz0" firstAttribute="bottom" secondItem="51v-sb-WMJ" secondAttribute="bottom" id="U6g-Pu-bCE"/>
+                            <constraint firstItem="s4S-87-Nz0" firstAttribute="leading" secondItem="51v-sb-WMJ" secondAttribute="leading" id="VOJ-DR-MN1"/>
+                            <constraint firstItem="s4S-87-Nz0" firstAttribute="trailing" secondItem="51v-sb-WMJ" secondAttribute="trailing" id="X9P-CP-5kk"/>
                             <constraint firstItem="51v-sb-WMJ" firstAttribute="top" secondItem="euo-9I-8Oa" secondAttribute="top" id="Zqa-sd-xky"/>
                             <constraint firstAttribute="trailing" secondItem="51v-sb-WMJ" secondAttribute="trailing" id="hMZ-1a-eGv"/>
                             <constraint firstAttribute="bottom" secondItem="51v-sb-WMJ" secondAttribute="bottom" id="oGC-2J-Bpd"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="containerView" destination="s4S-87-Nz0" id="wBH-n3-bgD"/>
                         <outlet property="tableView" destination="EAF-GR-RQV" id="W37-sM-Xpn"/>
                     </connections>
                 </viewController>
                 <customObject id="jzb-bj-gOr" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1034" y="627"/>
+            <point key="canvasLocation" x="-1248" y="627"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -1782,6 +1793,19 @@
                 <customObject id="bfH-B7-AX4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1111" y="1092"/>
+        </scene>
+        <!--Reader Proxy Controller-->
+        <scene sceneID="VSS-hi-JSO">
+            <objects>
+                <viewController id="frj-Vw-xPt" customClass="ReaderProxyController" sceneMemberID="viewController">
+                    <view key="view" id="lFq-qy-Y6i">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="uhx-Qp-LMF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1775" y="627"/>
         </scene>
     </scenes>
     <resources>
