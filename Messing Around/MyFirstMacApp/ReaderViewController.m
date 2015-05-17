@@ -7,9 +7,11 @@
 //
 
 #import "ReaderViewController.h"
+#import "AppUtils.h"
 
 @interface ReaderViewController (){
     int currentIndex;
+    int loadCount;
 }
 
 @end
@@ -19,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRightButtonPressed) name:@"RightReaderToolbarPressedNotification" object:nil];
     
     _imageArray = @[ [NSImage imageNamed:@"NSInfo"],
                      [NSImage imageNamed:@"NSAdvanced"],
@@ -32,6 +36,35 @@
     [_pageController setTransitionStyle:NSPageControllerTransitionStyleStackBook];
     
     currentIndex = 0;
+    loadCount = 0;
+    
+    [AppUtils sharedUtils].readerCont = self;
+}
+
+
+- (void) viewDidAppear
+{
+    [super viewDidAppear];
+    
+    if(loadCount == 1){
+        NSWindow *thisWindow = [[[NSApplication sharedApplication] windows] lastObject];
+        NSToolbar *toolBar = thisWindow.toolbar;
+        toolBar.visible = YES;
+        
+        for(NSToolbarItem *item in toolBar.visibleItems){
+            if([item.itemIdentifier isEqualToString:@"leftButton"]){
+                [item setAction:@selector(leftReaderToolbarPressed)];
+                [item setTarget:[AppUtils sharedUtils].mainCont];
+            }
+            if([item.itemIdentifier isEqualToString:@"rightButton"]){
+                [item setAction:@selector(rightReaderToolbarPressed)];
+                [item setTarget:[AppUtils sharedUtils].mainCont];
+                NSLog(@"%@", [AppUtils sharedUtils].mainCont);
+            }
+        }
+    }
+    
+    loadCount++;
 }
 
 
@@ -73,6 +106,22 @@
 }
 
 - (IBAction)rightButtonPressed:(id)sender {
+    if(currentIndex < [_imageArray count]-1){
+        currentIndex++;
+        _pageController.selectedIndex = currentIndex;
+    }
+}
+
+- (void) handleLeftButtonPressed
+{
+    if(currentIndex >= 1){
+        currentIndex--;
+        _pageController.selectedIndex = currentIndex;
+    }
+}
+
+- (void) handleRightButtonPressed
+{
     if(currentIndex < [_imageArray count]-1){
         currentIndex++;
         _pageController.selectedIndex = currentIndex;

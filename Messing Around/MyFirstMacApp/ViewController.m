@@ -11,6 +11,7 @@
 #import "DatabaseViewController.h"
 #import "AnimeInfoViewController.h"
 #import "ChapterListViewController.h"
+#import "AppUtils.h"
 
 @implementation ViewController{
     NSArray *dataSource;
@@ -34,6 +35,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleListItemSelectionNotification:) name:@"ListItemSelectedNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleGridItemSelectionNotification:) name:@"GridSelectionNotificationn" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleMangaListItemSelectionNotification:) name:@"MangaListItemSelectedNotification" object:nil];
+    
+    [AppUtils sharedUtils].mainCont = self;
 }
 
 
@@ -177,6 +180,16 @@
     }else{
         return image;
     }
+}
+
+- (void) rightReaderToolbarPressed
+{
+    [[[AppUtils sharedUtils] readerCont] handleRightButtonPressed];
+}
+
+- (void) leftReaderToolbarPressed
+{
+    [[[AppUtils sharedUtils] readerCont] handleLeftButtonPressed];
 }
 
 

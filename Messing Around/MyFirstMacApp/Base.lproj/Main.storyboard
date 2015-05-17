@@ -676,6 +676,21 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="163" y="199" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
+                        <toolbar key="toolbar" implicitIdentifier="2B2947C1-1029-4A7F-AA6B-068C84B9AE03" autosavesConfiguration="NO" prefersToBeShown="NO" displayMode="iconOnly" sizeMode="regular" id="uZh-gN-4cI">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="dCc-6V-iPI"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="B5j-FY-jmc"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="Q3I-ga-8ZB"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="idC-VD-IZU"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="awE-1Q-rnI"/>
+                                <toolbarItem implicitItemIdentifier="673D9ADE-F23C-4D9F-9FE4-ABC24229B48E" explicitItemIdentifier="leftButton" label="" paletteLabel="Toolbar Item" tag="-1" image="NSGoLeftTemplate" id="cwN-AV-LCe"/>
+                                <toolbarItem implicitItemIdentifier="435F7327-F4F5-484B-B050-A635EDF916EB" explicitItemIdentifier="rightButton" label="rightButton" paletteLabel="Toolbar Item" tag="-1" image="NSGoRightTemplate" id="Jej-Ip-GvB"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="cwN-AV-LCe"/>
+                                <toolbarItem reference="Jej-Ip-GvB"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                     </window>
                     <connections>
                         <segue destination="h51-9V-OQd" kind="relationship" relationship="window.shadowedContentViewController" id="slK-IJ-lZz"/>
@@ -1812,5 +1827,6 @@
         <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSGoLeftTemplate" width="9" height="12"/>
+        <image name="NSGoRightTemplate" width="9" height="12"/>
     </resources>
 </document>

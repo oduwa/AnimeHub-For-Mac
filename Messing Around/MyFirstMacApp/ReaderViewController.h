@@ -23,4 +23,7 @@
 - (IBAction)rightButtonPressed:(id)sender;
 - (IBAction)press:(id)sender;
 
+- (void) handleLeftButtonPressed;
+- (void) handleRightButtonPressed;
+
 @end

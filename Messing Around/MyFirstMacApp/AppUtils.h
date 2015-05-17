@@ -9,11 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import "DatabaseViewController.h"
+#import "ViewController.h"
+#import "ReaderViewController.h"
 
 
 @interface AppUtils : NSObject
 
 @property (strong, nonatomic) DatabaseViewController *dbCont;
+@property (strong, nonatomic) ViewController *mainCont;
+@property (strong, nonatomic) ReaderViewController *readerCont;
 @property (strong, nonatomic) NSString *mangaRootSource;
 
 /**
