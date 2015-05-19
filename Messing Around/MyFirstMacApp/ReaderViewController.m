@@ -22,7 +22,7 @@
     [super viewDidLoad];
     // Do view setup here.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleRightButtonPressed) name:@"RightReaderToolbarPressedNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChapterSelectedNotification:) name:@"ChapterSelectedNotification" object:nil];
     
     _imageArray = @[ [NSImage imageNamed:@"NSInfo"],
                      [NSImage imageNamed:@"NSAdvanced"],
@@ -33,7 +33,7 @@
     /* Set arranged objects for NSPageControl */
     [_pageController setArrangedObjects:_imageArray];
     /* Set transition style, in this example we use book style */
-    [_pageController setTransitionStyle:NSPageControllerTransitionStyleStackBook];
+    //[_pageController setTransitionStyle:NSPageControllerTransitionStyleStackBook];
     
     currentIndex = 0;
     loadCount = 0;
@@ -71,18 +71,19 @@
 - (void)pageController:(NSPageController *)pageController didTransitionToObject:(id)object {
     /* When image is changed, update info label's text */
     NSString *info = [NSString stringWithFormat:@"Image %ld/%ld", ([_pageController selectedIndex]+1), [_imageArray count]];
-    NSLog(@"%@", info);
+    //NSLog(@"%@", info);
 }
 
 - (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object {
     /* Returns object's array index as identiefier */
     NSString *identifier = [[NSNumber numberWithInteger:[_imageArray indexOfObject:object]] stringValue];
+    NSLog(@"%@", identifier);
     return identifier;
 }
 
 - (NSViewController *)pageController:(NSPageController *)pageController viewControllerForIdentifier:(NSString *)identifier {
     NSString *info = [NSString stringWithFormat:@"Image %ld/%ld", ([_pageController selectedIndex]+1), [_imageArray count]];
-    NSLog(@"%@", info);
+    //NSLog(@"%@", info);
     
     /* Create new view controller and image view */
     NSViewController *vController = [NSViewController new];
@@ -126,6 +127,34 @@
         currentIndex++;
         _pageController.selectedIndex = currentIndex;
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"CloseChapterNotification" object:nil];
+}
+
+- (void) handleChapterSelectedNotification:(NSNotification *)notification
+{
+    _chapterId = [notification userInfo][@"chapterId"];
+    [self loadDataForChapter];
+    
+}
+
+- (void) loadDataForChapter
+{
+    NSError *error;
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/chapter/%@/",[[AppUtils sharedUtils] mangaRootSource],  _chapterId];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    self.chapterItems = json[@"images"];
+    
+    _imageArray = @[ [NSImage imageNamed:@"NSGoLeftTemplate"],
+                     [NSImage imageNamed:@"NSGoRightTemplate"],
+                     [NSImage imageNamed:@"NSGoLeftTemplate"]];
+    
+    //_imageArray = nil;
+    
+    //[_pageController setArrangedObjects:nil];
 }
 
 - (IBAction)press:(id)sender {

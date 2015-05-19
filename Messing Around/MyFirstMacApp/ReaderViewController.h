@@ -10,6 +10,8 @@
 
 @interface ReaderViewController : NSViewController <NSPageControllerDelegate>
 
+@property (nonatomic, strong) NSString *chapterId;
+@property (nonatomic, strong) NSArray *chapterItems;
 
 @property (strong) IBOutlet NSPageController *pageController;
 @property (weak) IBOutlet NSScrollView *scrollView;
@@ -25,5 +27,7 @@
 
 - (void) handleLeftButtonPressed;
 - (void) handleRightButtonPressed;
+
+- (void) loadDataForChapter;
 
 @end

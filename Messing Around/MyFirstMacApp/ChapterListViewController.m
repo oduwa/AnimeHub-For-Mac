@@ -29,6 +29,7 @@
     _tableView.delegate = self;
     _tableView.rowSizeStyle = NSTableViewRowSizeStyleCustom;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCloseChapterNotification) name:@"CloseChapterNotification" object:nil];
 }
 
 - (void) viewWillAppear
@@ -114,6 +115,33 @@
 #pragma mark TableView Delegate
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
+{
+    int row = self.tableView.selectedRow;
+    NSDictionary *info = @{@"chapterId" : _chapterList[self.tableView.selectedRow-1][3]};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"ChapterSelectedNotification" object:nil userInfo:info];
+    
+    BOOL readerWasInstantiated = YES;
+    if([AppUtils sharedUtils].readerCont){
+//        [AppUtils sharedUtils].readerCont.chapterId = _chapterList[self.tableView.selectedRow-1][3];
+//        [[AppUtils sharedUtils].readerCont loadDataForChapter];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChapterSelectedNotification" object:nil userInfo:info];
+    }
+    else{
+        readerWasInstantiated = NO;
+    }
+    
+    [self toggleReaderMode];
+    
+    if(!readerWasInstantiated){
+//        [AppUtils sharedUtils].readerCont.chapterId = _chapterList[row-1][3];
+//        [[AppUtils sharedUtils].readerCont loadDataForChapter];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChapterSelectedNotification" object:nil userInfo:info];
+    }
+}
+
+#pragma mark - Selectors
+
+- (void) handleCloseChapterNotification
 {
     [self toggleReaderMode];
 }
