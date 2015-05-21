@@ -135,6 +135,7 @@
     if(!readerWasInstantiated){
 //        [AppUtils sharedUtils].readerCont.chapterId = _chapterList[row-1][3];
 //        [[AppUtils sharedUtils].readerCont loadDataForChapter];
+        // TODO: Send notification to container controller to instantiate new contained controller
         [[NSNotificationCenter defaultCenter] postNotificationName:@"ChapterSelectedNotification" object:nil userInfo:info];
     }
 }
