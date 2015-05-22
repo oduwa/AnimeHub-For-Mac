@@ -22,6 +22,7 @@ static AppUtils *globalInstance = nil;
     if(self){
         _mangaRootSource = @"https://www.mangaeden.com";
         //_mangaRootSource = @"https://www.perveden.com";
+        _pageImageURLs = [NSMutableArray array];
     }
     
     return self;

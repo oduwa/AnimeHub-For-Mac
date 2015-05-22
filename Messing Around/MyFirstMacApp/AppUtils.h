@@ -19,6 +19,7 @@
 @property (strong, nonatomic) ViewController *mainCont;
 @property (strong, nonatomic) ReaderViewController *readerCont;
 @property (strong, nonatomic) NSString *mangaRootSource;
+@property (strong, nonatomic) NSMutableArray *pageImageURLs;
 
 /**
  * Creates a singleton instance of an AppUtils object from which methods and resources can be shraed

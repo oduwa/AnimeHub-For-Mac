@@ -22,23 +22,22 @@
     [super viewDidLoad];
     // Do view setup here.
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChapterSelectedNotification:) name:@"ChapterSelectedNotification" object:nil];
+    //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChapterSelectedNotification:) name:@"ChapterSelectedNotification" object:nil];
     
-    _imageArray = @[ [NSImage imageNamed:@"NSInfo"],
-                     [NSImage imageNamed:@"NSAdvanced"],
-                     [NSImage imageNamed:@"NSCaution"]];
+    _imageArray = [AppUtils sharedUtils].pageImageURLs;
     
     /* Set delegate for NSPageControl */
     [_pageController setDelegate:self];
     /* Set arranged objects for NSPageControl */
     [_pageController setArrangedObjects:_imageArray];
     /* Set transition style, in this example we use book style */
-    //[_pageController setTransitionStyle:NSPageControllerTransitionStyleStackBook];
+    [_pageController setTransitionStyle:NSPageControllerTransitionStyleStackBook];
     
     currentIndex = 0;
     loadCount = 0;
     
     [AppUtils sharedUtils].readerCont = self;
+    
 }
 
 
@@ -70,19 +69,19 @@
 
 - (void)pageController:(NSPageController *)pageController didTransitionToObject:(id)object {
     /* When image is changed, update info label's text */
-    NSString *info = [NSString stringWithFormat:@"Image %ld/%ld", ([_pageController selectedIndex]+1), [_imageArray count]];
+    //NSString *info = [NSString stringWithFormat:@"Image %ld/%ld", ([_pageController selectedIndex]+1), [_imageArray count]];
     //NSLog(@"%@", info);
 }
 
 - (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object {
     /* Returns object's array index as identiefier */
     NSString *identifier = [[NSNumber numberWithInteger:[_imageArray indexOfObject:object]] stringValue];
-    NSLog(@"%@", identifier);
+    //NSLog(@"%@", identifier);
     return identifier;
 }
 
 - (NSViewController *)pageController:(NSPageController *)pageController viewControllerForIdentifier:(NSString *)identifier {
-    NSString *info = [NSString stringWithFormat:@"Image %ld/%ld", ([_pageController selectedIndex]+1), [_imageArray count]];
+    //NSString *info = [NSString stringWithFormat:@"Image %ld/%ld", ([_pageController selectedIndex]+1), [_imageArray count]];
     //NSLog(@"%@", info);
     
     /* Create new view controller and image view */
@@ -90,7 +89,9 @@
     NSImageView *iView = [[NSImageView alloc] initWithFrame:[_imageView frame]];
     
     /* Get image from image array using identiefier and set image to view */
-    [iView setImage:(NSImage *)[_imageArray objectAtIndex:[identifier integerValue]]];
+    NSImage *image = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:_imageArray[[identifier integerValue]]]];
+    //[iView setImage:(NSImage *)[_imageArray objectAtIndex:[identifier integerValue]]];
+    [iView setImage:image];
     /* Set image view's frame style to none */
     //[iView setImageFrameStyle:NSImageFrameNone];
     

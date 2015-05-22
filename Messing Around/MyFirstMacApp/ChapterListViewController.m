@@ -116,28 +116,24 @@
 
 - (void) tableViewSelectionDidChange:(NSNotification *)notification
 {
-    int row = self.tableView.selectedRow;
     NSDictionary *info = @{@"chapterId" : _chapterList[self.tableView.selectedRow-1][3]};
+    
+    NSError *error;
+    NSString *urlString = [NSString stringWithFormat:@"%@/api/chapter/%@/",[[AppUtils sharedUtils] mangaRootSource],  _chapterList[self.tableView.selectedRow-1][3]];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSData *data = [NSData dataWithContentsOfURL:url options:0 error:&error];
+    
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+    NSArray *chapterItems = json[@"images"];
+    [[AppUtils sharedUtils].pageImageURLs removeAllObjects];
+    for(NSArray *imageData in chapterItems){
+        NSString *pageImageUrl = [NSString stringWithFormat:@"https://cdn.mangaeden.com/mangasimg/%@", imageData[1]];
+        [[AppUtils sharedUtils].pageImageURLs addObject:pageImageUrl];
+    }
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"ChapterSelectedNotification" object:nil userInfo:info];
-    
-    BOOL readerWasInstantiated = YES;
-    if([AppUtils sharedUtils].readerCont){
-//        [AppUtils sharedUtils].readerCont.chapterId = _chapterList[self.tableView.selectedRow-1][3];
-//        [[AppUtils sharedUtils].readerCont loadDataForChapter];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChapterSelectedNotification" object:nil userInfo:info];
-    }
-    else{
-        readerWasInstantiated = NO;
-    }
-    
     [self toggleReaderMode];
     
-    if(!readerWasInstantiated){
-//        [AppUtils sharedUtils].readerCont.chapterId = _chapterList[row-1][3];
-//        [[AppUtils sharedUtils].readerCont loadDataForChapter];
-        // TODO: Send notification to container controller to instantiate new contained controller
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"ChapterSelectedNotification" object:nil userInfo:info];
-    }
 }
 
 #pragma mark - Selectors

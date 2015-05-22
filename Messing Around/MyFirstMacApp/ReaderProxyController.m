@@ -18,6 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleChapterSelectedNotification:) name:@"ChapterSelectedNotification" object:nil];
 }
 
 - (void) viewWillAppear
@@ -39,6 +41,13 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:o.view attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
     
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:o.view attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1 constant:0]];
+}
+
+- (void) handleChapterSelectedNotification:(NSNotification *)notification
+{
+    ReaderViewController *o = [[ReaderViewController alloc] initWithNibName:@"ReaderViewController" bundle:[NSBundle mainBundle]];
+    [self.view addSubview:o.view];
+    [self addAutoLayoutForProxyChild:o];
 }
 
 @end
